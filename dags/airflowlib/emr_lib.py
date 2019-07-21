@@ -25,14 +25,15 @@ def create_cluster(region_name, cluster_name='Airflow-' + str(datetime.now()), r
             'InstanceGroups': [
                 {
                     'Name': "Master nodes",
-                    'Market': 'ON_DEMAND',
+                    'Market': 'SPOT',
                     'InstanceRole': 'MASTER',
                     'InstanceType': master_instance_type,
                     'InstanceCount': 1
+                   
                 },
                 {
                     'Name': "Slave nodes",
-                    'Market': 'ON_DEMAND',
+                    'Market': 'SPOT',
                     'InstanceRole': 'CORE',
                     'InstanceType': core_node_instance_type,
                     'InstanceCount': num_core_nodes
@@ -67,7 +68,7 @@ def wait_for_cluster_creation(cluster_id):
 
 
 def terminate_cluster(cluster_id):
-    emr.terminate_job_flows(JobFlowIds=[cluster_id])
+    #emr.terminate_job_flows(JobFlowIds=[cluster_id])
 
 # Creates an interactive scala spark session.
 # Python(kind=pyspark), R(kind=sparkr) and SQL(kind=sql) spark sessions can also be created by changing the value of kind.
