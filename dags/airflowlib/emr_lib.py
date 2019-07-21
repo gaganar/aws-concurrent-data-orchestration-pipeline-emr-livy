@@ -68,7 +68,7 @@ def wait_for_cluster_creation(cluster_id):
 
 
 def terminate_cluster(cluster_id):
-    #emr.terminate_job_flows(JobFlowIds=[cluster_id])
+    emr.get_waiter('cluster_running').wait(ClusterId=cluster_id)
 
 # Creates an interactive scala spark session.
 # Python(kind=pyspark), R(kind=sparkr) and SQL(kind=sql) spark sessions can also be created by changing the value of kind.
